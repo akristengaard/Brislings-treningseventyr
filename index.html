@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+  <title>Brians Treningsreise</title>
+</head>
+<body>
+    <div class="topbar">
+        <h1>Brislings fotballeventyr</h1>
+      </div>
+  <div class="hero">
+    <img src="Brian_bilde.png" class="brian-img" id="brian-img" alt="Brian" />
+    <div class="level-box">
+        <h2>Level <span id="level">1</span></h2>
+      </div>
+
+      <div class="title-box" id="titleBox">Miniputt</div>
+      
+      <div class="xp-box">
+        <div class="xp-bar">
+          <div class="xp-fill" id="xpFill"></div>
+        </div>
+        <p class="xp-text" id="xpText">0 / 1 XP</p>
+      </div>
+  </div>
+
+  <div class="main-content">
+    <h2>Ferdighetstrening</h2>
+    <div id="skills-container">
+      <!-- Ferdigheter blir lagt inn her av JavaScript -->
+    </div>
+  
+    <h2>Bonusoppgaver</h2>
+<div id="bonus-container"></div>
+
+  <button id="resetButton" class="reset-btn">Nullstill alt</button>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
