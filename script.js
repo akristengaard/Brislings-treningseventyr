@@ -1,3 +1,10 @@
+function updateTimeSpent(skillBox, skillName) {
+  const totalKey = `${skillName}-total-minutes`;
+  const storedMinutes = parseInt(localStorage.getItem(totalKey) || "0", 10);
+
+  const timeDisplay = skillBox.querySelector(".time-spent");
+  timeDisplay.textContent = `Totalt: ${storedMinutes} minutter`;
+}
 
 const skills = [
   "Skudd venstre fot",
@@ -28,6 +35,10 @@ function renderSkills() {
   skills.forEach((skillName) => {
     const skillBox = document.createElement("div");
     skillBox.className = "skill-box";
+    
+    const timeText = document.createElement("p");
+    timeText.className = "time-spent";
+    timeText.textContent = "Totalt: 0 minutter";
 
     const title = document.createElement("h3");
     title.textContent = skillName;
@@ -57,6 +68,13 @@ function renderSkills() {
 
         btn.classList.add("active");
         btn.disabled = true;
+       // Oppdater total tid i localStorage
+        const totalKey = `${skillName}-total-minutes`;
+        const oldTotal = parseInt(localStorage.getItem(totalKey) || "0", 10);
+        localStorage.setItem(totalKey, oldTotal + 10);
+        updateTotalTime(); 
+
+        updateTimeSpent(skillBox, skillName);
         localStorage.setItem(key, "true");
 
         const allFilled = Array.from(
@@ -86,9 +104,13 @@ function renderSkills() {
       boxWrapper.appendChild(btn);
     }
 
+    skillBox.appendChild(timeText);
+    updateTimeSpent(skillBox, skillName);
+
     skillBox.appendChild(boxWrapper);
     container.appendChild(skillBox);
   });
+  updateTotalTime(); 
 }
 
 function updateXP(amount) {
@@ -254,4 +276,17 @@ const bonusTasks = [
     setTimeout(() => {
       anim.remove();
     }, 1500);
+  }
+
+  function updateTotalTime() {
+    let total = 0;
+    skills.forEach(skill => {
+      const key = `${skill}-total-minutes`;
+      total += parseInt(localStorage.getItem(key) || "0", 10);
+    });
+  
+    const display = document.getElementById("total-time");
+    if (display) {
+      display.textContent = `Total treningstid: ${total} minutter`;
+    }
   }
